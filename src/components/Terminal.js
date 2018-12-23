@@ -26,6 +26,8 @@ const Container = styled.div`
   @media (max-width: 700px) {
     width: 100vw;
     height: 100vh;
+    padding: 32px;
+    padding-top: 0;
   }
 `
 
@@ -34,7 +36,7 @@ const Glitch = styled.div`
   width: 100%;
   height: ${GLITCH_HEIGHT}px;
   background-color: white;
-  opacity: 0.005;
+  opacity: 0.01;
   top: ${props => props.offset}px;
   left: 0;
   right: 0;
