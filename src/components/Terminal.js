@@ -22,6 +22,11 @@ const Container = styled.div`
   padding: 64px;
   padding-top: 32px;
   overflow-y: scroll;
+
+  @media (max-width: 700px) {
+    width: 100vw;
+    height: 100vh;
+  }
 `
 
 const Glitch = styled.div`
