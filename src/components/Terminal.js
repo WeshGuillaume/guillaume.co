@@ -74,7 +74,7 @@ class Terminal extends Component {
   }
   render() {
     return (
-      <Wrapper>
+      <Wrapper onClick={window.focus}>
         <Glitch offset={this.state.glitchOffset} />
         <Container ref={this.terminal}>
           {this.state.entries.map(({ command, error, output }, index) => (

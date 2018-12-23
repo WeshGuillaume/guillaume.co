@@ -47,6 +47,11 @@ class Input extends Component {
     error: false
   }
 
+  constructor(props) {
+    super(props)
+    window.focus = this.focus.bind(this)
+  }
+
   updateInput1 = ({ target: { value } }) => {
     if (value.length >= 21) {
       return this.setState({
@@ -66,16 +71,25 @@ class Input extends Component {
     }
   }
 
+  focus() {
+    this.input.focus()
+  }
+
   render() {
     return (
       <Container>
         <Caret offset={this.state.value.length} />
         <InputElement
+          ref={i => (this.input = i)}
           error={this.state.error}
           onKeyDown={this.keyDown}
           autoFocus
           value={this.state.value}
           onChange={this.updateInput1}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
       </Container>
     )
