@@ -87,9 +87,12 @@ class Terminal extends Component {
       this.scrollBottom
     )
   }
+  focus = () => {
+    window.focus()
+  }
   render() {
     return (
-      <Wrapper onClick={window.focus}>
+      <Wrapper onClick={this.focus}>
         <Glitch offset={this.state.glitchOffset} />
         <Container ref={this.terminal}>
           <Introduction />
