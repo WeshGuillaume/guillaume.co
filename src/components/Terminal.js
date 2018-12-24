@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import noise from './noise.png'
 import Entry from './Entry'
+import Introduction from './Introduction'
 
 const TERMINAL_HEIGHT = 600
 const GLITCH_HEIGHT = 128
@@ -50,7 +51,7 @@ class Terminal extends Component {
         command: 'whoami',
         error: false,
         output:
-          'My name is Guillaume, I am a web developper and Product guy based in Paris, for now. I’m available for all kind of stuff. Find out more by using the terminal 🙃'
+          'My name is Guillaume, I am a web developper and Product guy based in Paris, for now. I’m available for all kind of stuff. Find out more by using the terminal 🙃 (type "help" to get an overview of the available commands)'
       }
     ]
   }
@@ -84,6 +85,7 @@ class Terminal extends Component {
       <Wrapper onClick={window.focus}>
         <Glitch offset={this.state.glitchOffset} />
         <Container ref={this.terminal}>
+          <Introduction />
           {this.state.entries.map(({ command, error, output }, index) => (
             <Entry
               key={index}
@@ -92,7 +94,7 @@ class Terminal extends Component {
               output={output}
             />
           ))}
-          <Entry onSubmit={this.submit} />
+          <Entry onSubmit={this.submit} command={null} />
         </Container>
       </Wrapper>
     )

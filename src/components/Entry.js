@@ -31,8 +31,8 @@ const Output = styled.p`
 
 class Entry extends Component {
   submit = command => {
-    const output = terminal(command)
-    const error = !output
+    const output = command ? terminal(command) : ''
+    const error = output === null
     this.props.onSubmit({
       error: !output,
       output: error ? `guillaume.co: Command not found: ${command}` : output,
@@ -49,7 +49,7 @@ class Entry extends Component {
     return (
       <Container>
         <Prompt>▶</Prompt>
-        {command ? (
+        {command !== null ? (
           <PastCommand error={error}>{command}</PastCommand>
         ) : (
           <Input onSubmit={this.submit} />

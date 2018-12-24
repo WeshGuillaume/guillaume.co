@@ -41,9 +41,14 @@ const Caret = styled.div`
   }
 `
 
+function getValue({ history, cursor, value }) {
+  return history[cursor] || value
+}
+
 class Input extends Component {
   state = {
     value: '',
+    history: [],
     error: false
   }
 
@@ -52,23 +57,68 @@ class Input extends Component {
     window.focus = this.focus.bind(this)
   }
 
-  updateInput1 = ({ target: { value } }) => {
+  updateInput = ({ target: { value } }) => {
     if (value.length >= 21) {
       return this.setState({
         error: true,
-        value: this.state.value
+        value: this.state.value,
+        cursor: -1
       })
     }
-    return this.setState({ value: value, error: false })
+    return this.setState({ value: value, error: false, cursor: -1 })
   }
 
-  keyDown = ({ key }) => {
-    const value = this.state.value
-    if (key === 'Enter' && value.trim() !== '') {
-      this.setState({ value: '', error: false }, () =>
-        this.props.onSubmit(value)
+  submit = () => {
+    const value = getValue(this.state)
+    this.setState(
+      {
+        value: '',
+        error: false,
+        history: (value.trim() ? [value] : []).concat(this.state.history),
+        cursor: -1
+      },
+      () => this.props.onSubmit(value.trim())
+    )
+  }
+
+  keyDown = e => {
+    const { key, keyCode, ctrlKey } = e
+    if (key === 'Enter') {
+      this.submit()
+    }
+
+    if (keyCode === 38 && this.state.cursor < this.state.history.length - 1) {
+      e.preventDefault()
+      e.stopPropagation()
+      this.setState({ cursor: this.state.cursor + 1 }, () =>
+        this.moveCaretToTheEnd(this.input)
       )
     }
+
+    if (keyCode === 40 && this.state.cursor > -1) {
+      e.preventDefault()
+      e.stopPropagation()
+      this.setState({ cursor: this.state.cursor - 1 }, () =>
+        this.moveCaretToTheEnd(this.input)
+      )
+    }
+
+    if (keyCode === 67 && ctrlKey) {
+      return this.setState(
+        {
+          value: '',
+          error: false,
+          cursor: -1
+        },
+        this.submit
+      )
+    }
+  }
+
+  moveCaretToTheEnd = () => {
+    const length = getValue(this.state).length
+    this.input.selectionStart = this.input.value.length
+    this.input.selectionEnd = this.input.value.length
   }
 
   focus() {
@@ -76,16 +126,18 @@ class Input extends Component {
   }
 
   render() {
+    const { cursor, value, history } = this.state
+
     return (
       <Container>
-        <Caret offset={this.state.value.length} />
+        <Caret offset={(history[cursor] || value).length} />
         <InputElement
           ref={i => (this.input = i)}
           error={this.state.error}
           onKeyDown={this.keyDown}
           autoFocus
-          value={this.state.value}
-          onChange={this.updateInput1}
+          value={history[cursor] || value}
+          onChange={this.updateInput}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
