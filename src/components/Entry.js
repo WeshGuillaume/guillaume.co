@@ -31,7 +31,10 @@ const Output = styled.p`
 
 class Entry extends Component {
   submit = command => {
-    const output = command ? terminal(command) : ''
+    const output = command ? terminal(command, { clear: this.props.clear }) : ''
+    if (typeof output === 'function') {
+      return output()
+    }
     const error = output === null
     this.props.onSubmit({
       error: !output,

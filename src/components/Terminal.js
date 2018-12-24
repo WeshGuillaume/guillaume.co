@@ -10,6 +10,7 @@ const GLITCH_HEIGHT = 128
 
 const Wrapper = styled.div`
   position: relative;
+  overflow: hidden;
 `
 
 const Container = styled.div`
@@ -37,10 +38,25 @@ const Glitch = styled.div`
   width: 100%;
   height: ${GLITCH_HEIGHT}px;
   background-color: white;
-  opacity: 0.01;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  opacity: 0.025;
   top: ${props => props.offset}px;
   left: 0;
   right: 0;
+  animation: slider 5s linear infinite;
+
+  @keyframes slider {
+    0% {
+      top: ${-GLITCH_HEIGHT}px;
+    }
+    100% {
+      top: ${TERMINAL_HEIGHT}px;
+    }
+  }
 `
 
 class Terminal extends Component {
@@ -59,20 +75,11 @@ class Terminal extends Component {
     super(props)
     this.terminal = createRef()
   }
-  updateGlitchOffset = () => {
-    const { glitchOffset } = this.state
-    if (glitchOffset >= TERMINAL_HEIGHT) {
-      return this.setState({ glitchOffset: -GLITCH_HEIGHT })
-    }
-    return this.setState({ glitchOffset: glitchOffset + 1 })
+  clear = () => {
+    this.setState({ entries: [] })
   }
   scrollBottom = () => {
     this.terminal.current.scrollTop = this.terminal.current.scrollHeight
-  }
-  componentDidMount() {
-    setInterval(() => {
-      this.updateGlitchOffset()
-    }, 5)
   }
   submit = entry => {
     this.setState(
@@ -94,7 +101,7 @@ class Terminal extends Component {
               output={output}
             />
           ))}
-          <Entry onSubmit={this.submit} command={null} />
+          <Entry clear={this.clear} onSubmit={this.submit} command={null} />
         </Container>
       </Wrapper>
     )

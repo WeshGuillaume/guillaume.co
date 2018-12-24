@@ -23,6 +23,9 @@ After a few experiences, and some time learning on my own, I managed to master a
   notFound() {
     return null
   },
+  clear(_, context) {
+    return context.clear
+  },
   help() {
     return `
 To get to know me better, you can type a few of the following commands:
@@ -33,6 +36,6 @@ education: list where I went to school
     `.trim()
   }
 }
-export default function terminal(command) {
-  return (commands[command] || commands['notFound'])(command)
+export default function terminal(command, context) {
+  return (commands[command] || commands['notFound'])(command, context)
 }
