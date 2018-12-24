@@ -11,16 +11,16 @@ const GLITCH_HEIGHT = 128
 const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
+  box-shadow: 32px 32px 64px 0 rgba(45, 49, 62, 0.88);
+  border-radius: 16px;
 `
 
 const Container = styled.div`
   width: 990px;
   height: ${TERMINAL_HEIGHT}px;
-  border-radius: 16px;
   background-color: #2d313e;
   background: url(${noise});
   overflow: hidden;
-  box-shadow: 32px 32px 64px 0 rgba(45, 49, 62, 0.88);
   padding: 64px;
   padding-top: 32px;
   overflow-y: scroll;
