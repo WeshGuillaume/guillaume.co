@@ -26,6 +26,15 @@ After a few experiences, and some time learning on my own, I managed to master a
   clear(_, context) {
     return context.clear
   },
+  contact() {
+    return `
+Email: hello@guillaume.co
+📌 Paris, France
+    `.trim()
+  },
+  email() {
+    return `Email: hello@guillaume.co`
+  },
   help() {
     return `
 To get to know me better, you can type a few of the following commands:
