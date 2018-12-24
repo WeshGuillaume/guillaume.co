@@ -26,6 +26,26 @@ After a few experiences, and some time learning on my own, I managed to master a
   clear(_, context) {
     return context.clear
   },
+  social() {
+    return `
+${commands.linkedin()}
+${commands.github()}
+${commands.twitter()}
+${commands.instagram()}
+    `.trim()
+  },
+  github() {
+    return `Github: https://github.com/GuillaumeBadi`
+  },
+  twitter() {
+    return `Twitter: https://twitter.com/weshguillaume`
+  },
+  instagram() {
+    return `Instagram: https://instagram.com/weshguillaume`
+  },
+  linkedin() {
+    return `LinkedIn: https://www.linkedin.com/in/guillaume-badi-a06008b9/`
+  },
   contact() {
     return `
 Email: hello@guillaume.co
@@ -49,5 +69,9 @@ clear: Clean up that terminal
   }
 }
 export default function terminal(command, context) {
-  return (commands[command] || commands['notFound'])(command, context)
+  const result = (commands[command] || commands['notFound'])(command, context)
+  window.analytics.track('Terminal > Input', {
+    command,
+    unknown: !!commands[command]
+  })
 }
