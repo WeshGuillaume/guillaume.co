@@ -13,6 +13,10 @@ const Wrapper = styled.div`
   overflow: hidden;
   box-shadow: 32px 32px 64px 0 rgba(45, 49, 62, 0.88);
   border-radius: 16px;
+  @media (max-width: 700px) {
+    border-radius: 0;
+    box-shadow: none;
+  }
 `
 
 const Container = styled.div`

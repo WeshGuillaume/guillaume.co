@@ -13,6 +13,10 @@ const Container = styled.div`
   align-items: center;
   background-color: #efefef;
   border: 16px solid #2d313e;
+
+  @media (max-width: 700px) {
+    border: 0;
+  }
 `
 
 class App extends Component {
