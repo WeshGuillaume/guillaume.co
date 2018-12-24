@@ -72,6 +72,7 @@ export default function terminal(command, context) {
   const result = (commands[command] || commands['notFound'])(command, context)
   window.analytics.track('Terminal > Input', {
     command,
-    unknown: !!commands[command]
+    unknown: !commands[command]
   })
+  return result
 }
