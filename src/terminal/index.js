@@ -31,8 +31,11 @@ After a few experiences, and some time learning on my own, I managed to master a
 To get to know me better, you can type a few of the following commands:
 
 help: access to this help message
-experience: discover my previous professional experience
+whoami: my basic introduction
 education: list where I went to school
+skills: Get a non-exhautive list of what I can do
+
+clear: Clean up that terminal
     `.trim()
   }
 }
