@@ -55,6 +55,24 @@ Email: hello@guillaume.co
   email() {
     return `Email: hello@guillaume.co`
   },
+  top() {
+    return `Alway up for a drink, 100%`
+  },
+  uname() {
+    return `GuillaumeOS v1.0.0`
+  },
+  ps() {
+    return `You're the only one, I Promise`
+  },
+  ls() {
+    return `/`
+  },
+  cd() {
+    return `You're not going anywhere 😉`
+  },
+  school() {
+    return commands.education()
+  },
   help() {
     return `
 To get to know me better, you can type a few of the following commands:
@@ -69,7 +87,10 @@ clear: Clean up that terminal
   }
 }
 export default function terminal(command, context) {
-  const result = (commands[command] || commands['notFound'])(command, context)
+  const result = (commands[command.split(' ')[0]] || commands['notFound'])(
+    command,
+    context
+  )
   window.analytics.track('Terminal > Input', {
     command,
     unknown: !commands[command]
