@@ -35,9 +35,7 @@ After a few experiences, and some time learning on my own, I managed to master a
   notFound() {
     return null
   },
-  clear({ context }) {
-    return context.clear
-  },
+  clear: { context: 'clear' },
   social: Social,
   github() {
     return <Fragment>Github: <a target='_blank' href='https://github.com/GuillaumeBadi'>@GuillaumeBadi</a></Fragment>
@@ -107,12 +105,9 @@ clear: Clean up that terminal
 }
 export default function terminal(command, context) {
   const Element = commands[command.split(' ')[0]]
-  if (!Element) {
-    return null
-  }
   window.analytics.track('Terminal > Input', {
     command,
-    unknown: !commands[command]
+    unknown: !Element
   })
-  return <Element context={context} />
+  return Element || null
 }

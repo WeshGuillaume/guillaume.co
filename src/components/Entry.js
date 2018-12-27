@@ -31,14 +31,14 @@ const Output = styled.p`
 
 class Entry extends Component {
   submit = command => {
-    const output = command ? terminal(command, { clear: this.props.clear }) : ''
-    if (typeof output === 'function') {
-      return output()
+    const OutputElement = command ? terminal(command) : ''
+    if (OutputElement.context) {
+      return this.props[OutputElement.context]()
     }
-    const error = output === null
+    const error = OutputElement === null
     this.props.onSubmit({
-      error: !output,
-      output: error ? `guillaume.co: Command not found: ${command}` : output,
+      error,
+      output: error ? `guillaume.co: Command not found: ${command}` : <OutputElement />,
       command
     })
   }
