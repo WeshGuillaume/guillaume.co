@@ -13,6 +13,9 @@ const commands = {
 After getting a Baccalauréat in Economics and Management, I attended University (Economics) in Marseille, France, before attending a school named 42 in Paris in computer science where I learned unix, javascript, C and A LOT MORE.
     `.trim()
   },
+  experience() {
+    return `to be implemented...`
+  },
   skills() {
     return `
 After a few experiences, and some time learning on my own, I managed to master a few skills:
@@ -92,6 +95,8 @@ help: access to this help message
 whoami: my basic introduction
 education: list where I went to school
 skills: Get a non-exhautive list of what I can do
+contact: the <strong>privilege</strong> to get my contact info
+social: All my social links right in the terminal
 
 clear: Clean up that terminal
     `.trim()
