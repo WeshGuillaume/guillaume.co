@@ -1,3 +1,9 @@
+
+import React, { Fragment } from 'react'
+
+import Social from '../components/Commands/Social'
+import Email from '../components/Commands/Email'
+
 const commands = {
   whoami() {
     return `My name is Guillaume, I am a web developper and Product guy based in Paris, for now. I’m available for all kind of stuff. Find out more by using the terminal 🙃`
@@ -26,16 +32,18 @@ After a few experiences, and some time learning on my own, I managed to master a
   clear(_, context) {
     return context.clear
   },
-  social() {
-    return `
-${commands.linkedin()}
-${commands.github()}
-${commands.twitter()}
-${commands.instagram()}
-    `.trim()
-  },
+  social: Social,
   github() {
-    return `Github: https://github.com/GuillaumeBadi`
+    return <Fragment>Github: <a target='_blank' href='https://github.com/GuillaumeBadi'>@GuillaumeBadi</a></Fragment>
+  },
+  hello() {
+    return `I am ... not a chatbot, but hey !`
+  },
+  hi() {
+    return commands.hello()
+  },
+  hey() {
+    return commands.hello()
   },
   twitter() {
     return `Twitter: https://twitter.com/weshguillaume`
@@ -46,10 +54,13 @@ ${commands.instagram()}
   linkedin() {
     return `LinkedIn: https://www.linkedin.com/in/guillaume-badi-a06008b9/`
   },
+  location() {
+    return `📌 Paris, France`
+  },
   contact() {
     return `
-Email: hello@guillaume.co
-📌 Paris, France
+${commands.email()}
+${commands.location()}
     `.trim()
   },
   email() {
@@ -87,13 +98,13 @@ clear: Clean up that terminal
   }
 }
 export default function terminal(command, context) {
-  const result = (commands[command.split(' ')[0]] || commands['notFound'])(
-    command,
-    context
-  )
+  const Element = commands[command.split(' ')[0]]
+  if (!Element) {
+    return null
+  }
   window.analytics.track('Terminal > Input', {
     command,
     unknown: !commands[command]
   })
-  return result
+  return <Element context={context} />
 }

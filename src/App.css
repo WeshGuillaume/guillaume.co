@@ -1,1 +1,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+a {
+  color: #4CC9FA;
+  font-family: 'Fira Code';
+  font-weight: 500;
+}
+
+strong {
+  font-weight: 700;
+}
