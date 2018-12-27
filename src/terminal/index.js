@@ -13,6 +13,9 @@ const commands = {
 After getting a Baccalauréat in Economics and Management, I attended University (Economics) in Marseille, France, before attending a school named 42 in Paris in computer science where I learned unix, javascript, C and A LOT MORE.
     `.trim()
   },
+  jah() {
+    return `Rastafari !`
+  },
   experience() {
     return `to be implemented...`
   },
