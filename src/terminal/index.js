@@ -35,7 +35,7 @@ After a few experiences, and some time learning on my own, I managed to master a
   notFound() {
     return null
   },
-  clear(_, context) {
+  clear({ context }) {
     return context.clear
   },
   social: Social,
