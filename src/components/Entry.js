@@ -31,8 +31,8 @@ const Output = styled.p`
 
 class Entry extends Component {
   submit = command => {
-    const OutputElement = command ? terminal(command) : ''
-    if (OutputElement.context) {
+    const OutputElement = command ? terminal(command) : () => <span />
+    if (OutputElement && OutputElement.context) {
       return this.props[OutputElement.context]()
     }
     const error = OutputElement === null
