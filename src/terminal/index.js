@@ -89,18 +89,36 @@ ${commands.location()}
     return commands.education()
   },
   help() {
-    return `
-To get to know me better, you can type a few of the following commands:
+    return (
+      <p>
+        <p>
+          To get to know me better, you can type a few of the following commands:
+        </p>
 
-help: access to this help message
-whoami: my basic introduction
-education: list where I went to school
-skills: Get a non-exhautive list of what I can do
-contact: the <strong>privilege</strong> to get my contact info
-social: All my social links right in the terminal
+        <p>
+          help: access to this help message
+        </p>
+        <p>
+          whoami: my basic introduction
+        </p>
+        <p>
+          education: list where I went to school
+        </p>
+        <p>
+          skills: Get a non-exhautive list of what I can do
+        </p>
+        <p>
+          contact: the <strong>privilege</strong> to get my contact info
+        </p>
+        <p>
+          social: All my social links right in the terminal
+        </p>
 
-clear: Clean up that terminal
-    `.trim()
+        <p>
+          clear: Clean up that terminal
+        </p>
+      </p>
+    )
   }
 }
 export default function terminal(command, context) {

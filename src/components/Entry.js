@@ -49,6 +49,7 @@ class Entry extends Component {
 
   render() {
     const { command, output, error } = this.props
+    console.log({ output })
     return (
       <Container>
         <Prompt>▶</Prompt>
