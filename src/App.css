@@ -1,5 +1,9 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html, body {
+  background-color: #008CFF;
+}
+
 a {
   color: #4CC9FA;
   font-family: 'Fira Code';
